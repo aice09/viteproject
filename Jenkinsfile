@@ -40,17 +40,5 @@ pipeline {
         }
       }
     }
-
-    stage('Notify') {
-      steps {
-        office365ConnectorSend message: "Deployed `${env.BRANCH_NAME}` to `${env.BRANCH_NAME == 'main' ? 'production' : 'development'}`", status: 'Success'
-      }
-    }
-  }
-
-  post {
-    failure {
-      office365ConnectorSend message: "Build failed for `${env.BRANCH_NAME}`", status: 'Failed'
-    }
-  }
+  }  
 }
